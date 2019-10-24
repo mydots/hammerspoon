@@ -212,3 +212,19 @@ end
 
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
+
+hs.hotkey.bind({"alt"}, "m", function()
+	text = hs.window.frontmostWindow():title()
+	key  = ""
+	if string.match(text, "Sumo") then
+		hs.notify.new({title="Sumo Logic", informativeText=text}):send()
+		key = "Sumo Logic"
+	elseif string.match(text, "Amazon Web Services") then
+		key = "Amazon Web Services"
+	end
+	cmd = string.format("/usr/local/bin/ykman oath code -s '%s'", key)
+	token = hs.execute(cmd)
+	hs.notify.new({title=key, informativeText=token}):send()
+	hs.eventtap.keyStrokes(token:gsub("\n", ""))
+	hs.eventtap.keyStroke({}, "return")
+end)
