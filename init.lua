@@ -221,6 +221,11 @@ hs.hotkey.bind({"alt"}, "m", function()
 		key = "Sumo Logic"
 	elseif string.match(text, "Amazon Web Services") then
 		key = "Amazon Web Services"
+	elseif string.match(text, "usertesting%-dev %- Extra Verification") then
+		key = "Okta: Dev"
+	else
+		print(text)
+		hs.notify.new({title="Page Not Found", informativeText=text}):send()
 	end
 	cmd = string.format("/usr/local/bin/ykman oath code -s '%s'", key)
 	token = hs.execute(cmd)
