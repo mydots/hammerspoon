@@ -223,6 +223,16 @@ hs.hotkey.bind({"alt"}, "m", function()
 		key = "Amazon Web Services"
 	elseif string.match(text, "usertesting%-dev %- Extra Verification") then
 		key = "Okta: Dev"
+	elseif string.match(text, "usertesting%-staging %- Extra Verification") then
+		key = "Okta: Staging"
+	elseif string.match(text, "usertesting %- Extra Verification") then
+		key = "Okta: Production"
+	elseif string.match(text, "Gmail") then
+		key = "Gmail"
+	elseif string.match(text, "Google") then
+		key = "Gmail"
+	elseif string.match(text, "LastPass") then
+		key = "LastPass"
 	else
 		print(text)
 		hs.notify.new({title="Page Not Found", informativeText=text}):send()
