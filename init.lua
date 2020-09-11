@@ -227,6 +227,8 @@ hs.hotkey.bind({"alt"}, "m", function()
 		key = "Okta: Staging"
 	elseif string.match(text, "usertesting %- Extra Verification") then
 		key = "Okta: Production"
+	elseif string.match(text, "Zscaler Security") then
+		key = "Gmail"
 	elseif string.match(text, "Gmail") then
 		key = "Gmail"
 	elseif string.match(text, "Google") then
