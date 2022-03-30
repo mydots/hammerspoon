@@ -220,6 +220,8 @@ hs.hotkey.bind({"alt"}, "m", function()
 		key = "Amazon Web Services"
 	elseif string.match(text, "GitHub") then
 		key = "Github"
+	elseif string.match(text, "Binance") then
+		key = "Binance"
 	else
 		print(text)
 		hs.notify.new({title="Page Not Found", informativeText=text}):send()
