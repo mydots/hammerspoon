@@ -226,7 +226,7 @@ hs.hotkey.bind({"alt"}, "m", function()
 		return
 	end
 	hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
-	cmd = string.format("/usr/local/bin/ykman oath accounts code -s '%s'", key)
+	cmd = string.format("/opt/homebrew/bin/ykman oath accounts code -s '%s'", key)
 	token = hs.execute(cmd)
 	hs.notify.new({title=key, informativeText=token}):send()
 	hs.eventtap.keyStrokes(token:gsub("\n", ""))
