@@ -59,6 +59,7 @@ end)
 
 
 hs.hotkey.bind({"alt"}, "m", function()
+	bin = "/Users/franky.wahl/Dev/Go/bin/oathman"
 	text = hs.window.frontmostWindow():title()
 	key  = ""
 	if string.match(text, "Amazon Web Services") then
@@ -67,13 +68,14 @@ hs.hotkey.bind({"alt"}, "m", function()
 		key = "Github"
 	elseif string.match(text, "Binance") then
 		key = "Binance"
+	elseif string.match(text, "1Password") then
+		key = "1password"
 	else
 		print(text)
 		hs.notify.new({title="Page Not Found", informativeText=text}):send()
 		return
 	end
-	hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
-	cmd = string.format("/opt/homebrew/bin/ykman oath accounts code -s '%s'", key)
+	cmd = string.format("%s oath accounts code -s '%s'", bin, key)
 	token = hs.execute(cmd)
 	hs.notify.new({title=key, informativeText=token}):send()
 	hs.eventtap.keyStrokes(token:gsub("\n", ""))
