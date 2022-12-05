@@ -217,13 +217,7 @@ hs.hotkey.bind({"alt"}, "m", function()
 	bin = "/Users/franky.wahl/Dev/Go/bin/oathman"
 	text = hs.window.frontmostWindow():title()
 	key  = ""
-	if string.match(text, "Amazon Web Services") then
-		key = "Amazon Web Services"
-	elseif string.match(text, "GitHub") then
-		key = "Github"
-	elseif string.match(text, "Binance") then
-		key = "Binance"
-	elseif string.match(text, "1Password") then
+	if string.match(text, "1Password") then
 		key = "1password"
 	else
 		print(text)
