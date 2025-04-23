@@ -214,11 +214,17 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
 
 hs.hotkey.bind({"alt"}, "m", function()
-	bin = "/Users/franky.wahl/Dev/Go/bin/oathman"
+	bin = "/Users/frankywahl/Dev/Go/bin/oathman"
 	text = hs.window.frontmostWindow():title()
 	key  = ""
 	if string.match(text, "1Password") then
 		key = "1password"
+	elseif string.match(text, "Gmail") then
+		key = "Google"
+	elseif string.match(text, "Cloudflare") then
+		key = "Cloudflare"
+	elseif string.match(text, "Recurly") then
+		key = "Recurly"
 	else
 		print(text)
 		hs.notify.new({title="Page Not Found", informativeText=text}):send()
@@ -230,3 +236,13 @@ hs.hotkey.bind({"alt"}, "m", function()
 	hs.eventtap.keyStrokes(token:gsub("\n", ""))
 	hs.eventtap.keyStroke({}, "return" )
 end)
+
+-- hs.hotkey.bind({"alt"}, "b", function()
+-- 	if hs.eventtap.isSecureInputEnabled() then
+-- 		hs.notify.new({title="Secure Input", informativeText="Enabled"}):send()
+-- 	else
+-- 		hs.notify.new({title="Secure Input", informativeText="Disabled"}):send()
+-- 	end
+-- 	-- os.execute("grep USER_PASSWORD ~/.keys | cut -d = -f 2| pbcopy")
+-- 	hs.eventtap.keyStroke({}, "return" )
+-- end)
