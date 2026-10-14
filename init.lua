@@ -82,15 +82,21 @@ hs.hotkey.bind({"alt"}, "m", function()
 	hs.eventtap.keyStroke({}, "return" )
 end)
 
--- hs.hotkey.bind({"alt"}, "b", function()
--- 	if hs.eventtap.isSecureInputEnabled() then
--- 		hs.notify.new({title="Secure Input", informativeText="Enabled"}):send()
--- 	else
--- 		hs.notify.new({title="Secure Input", informativeText="Disabled"}):send()
--- 	end
--- 	-- os.execute("grep USER_PASSWORD ~/.keys | cut -d = -f 2| pbcopy")
--- 	hs.eventtap.keyStroke({}, "return" )
--- end)
+-- Type OKTA_PASSWORD env var followed by return
+hs.hotkey.bind({"alt"}, "p", function()
+	if hs.eventtap.isSecureInputEnabled() then
+		hs.notify.new({title="Secure Input", informativeText="Enabled"}):send()
+	end
+	-- GUI apps don't inherit shell exports; source ~/.keys (where OKTA_PASSWORD is exported) directly
+	password = hs.execute(". ~/.keys && echo \"$OKTA_PASSWORD\""):gsub("%s+$", "")
+	if password == nil or password == "" then
+		hs.notify.new({title="Hammerspoon", informativeText="OKTA_PASSWORD not set"}):send()
+		return
+	end
+	hs.pasteboard.setContents(password)
+	hs.notify.new({title="Hammerspoon", informativeText="Password Copied to clipboard"}):send()
+end)
+
 hs.hotkey.bind({}, "F2", function()
 		currentBrightness = hs.brightness.get()
 		hs.brightness.set(100)
