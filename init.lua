@@ -41,6 +41,17 @@ spoon.SpoonInstall:andUse("ReloadConfiguration", {
 	end
 })
 
+-- Pluggable launch bar
+spoon.SpoonInstall:andUse("Seal", {
+	hotkeys = {
+		toggle = { {"cmd"}, "space" },
+	},
+	fn = function(s)
+		s:loadPlugins({"apps", "calc", "screencapture", "pasteboard"})
+	end,
+	start = true,
+})
+
 -- Applications
 hs.hotkey.bind(altHyper, "space", function()
 	os.execute("open /Applications/iTerm.app")
