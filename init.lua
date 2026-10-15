@@ -33,26 +33,19 @@ spoon.SpoonInstall:andUse("WinWin", {
 	end
 })
 
+-- Watch config for changes and reload when they occur
+spoon.SpoonInstall:andUse("ReloadConfiguration", {
+	start = true,
+	fn = function()
+		hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
+	end
+})
+
 -- Applications
 hs.hotkey.bind(altHyper, "space", function()
 	os.execute("open /Applications/iTerm.app")
 end)
 
--- Watch config for changes and reload when they occur
-function reloadConfig(files)
-	doReload = false
-	for _,file in pairs(files) do
-		if file:sub(-4) == ".lua" then
-			doReload = true
-		end
-	end
-	if doReload then
-		hs.reload()
-	end
-end
-
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
-hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
 
 hs.hotkey.bind({"alt"}, "m", function()
 	text = hs.window.frontmostWindow():title()
